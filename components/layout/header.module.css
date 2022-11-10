@@ -1,0 +1,22 @@
+
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: var(--xs);
+    color: #FFF;
+    padding: 0 1rem;
+}
+
+.header button {
+    background: none;
+    border: none;
+    height: 100%;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    color: #FFF;
+    cursor: pointer;
+}

@@ -1,11 +1,11 @@
 import { signOut } from "next-auth/react"
-
+import styles from "./header.module.css"
 
 export function Header(props: { email: string }) {
     const { email } = props;
     return (
-        <header className="flex flex-row justify-between p-4">
-            <p>Signed in as {email}</p>
+        <header className={styles.header}>
+            <div>Signed in as {email}</div>
             <button onClick={() => signOut()}>Sign out</button>
         </header>
     )
