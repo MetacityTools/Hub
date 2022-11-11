@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { FileSelect } from "./form/fileSelect";
-import { FileView } from "./form/fileView";
-import { DialogLayout } from "./layout/dialog";
+import { FileSelect } from "../form/fileSelect";
+import { FileView } from "../form/fileView";
+import { PageLayout } from "../layout/page";
 
 
 
 
-export function Upload(props: { email: string }) {
+export function DatasetUpload(props: { email: string }) {
     const { email } = props
     const [files, setFiles] = useState<File[]>([]);
     const [selected, setSelected] = useState<File[]>([]);
@@ -26,7 +26,7 @@ export function Upload(props: { email: string }) {
     }, [selected]);
 
     return (
-        <DialogLayout email={email}>
+        <PageLayout email={email}>
             { stage == 0 && <FileSelect onSelect={(files: File[]) => setFiles(files)}/>}
             { stage == 1 && <FileView 
                                 files={files} 
@@ -34,7 +34,7 @@ export function Upload(props: { email: string }) {
                                 onAbort={() => setStage(0)}
                             />}
             { stage == 2 && <div>Upload</div>}
-        </DialogLayout>
+        </PageLayout>
     );
 
 }

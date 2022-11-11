@@ -1,0 +1,18 @@
+
+
+.panel {
+
+}
+
+.content {
+    padding: 2rem 0;
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.content h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    margin-top: 0
+}

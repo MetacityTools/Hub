@@ -1,13 +1,12 @@
 import { useSession, signIn } from "next-auth/react"
-import { DialogLayout } from "../../components/layout/dialog"
 import { FileSelect } from "../../components/form/fileSelect"
-import { Upload } from "../../components/upload"
+import { DatasetUpload } from "../../components/pages/datasetUpload"
 
 export default function Index() {
 	const { data: session } = useSession()
 	if (session && session.user && session.user.email) {
 		return (
-			<Upload email={session.user.email}/>
+			<DatasetUpload email={session.user.email}/>
 		)
 	}
 	//todo redirect

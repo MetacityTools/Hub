@@ -1,0 +1,47 @@
+.card,
+.cardIcon,
+.cardLink,
+.cardIconLink {
+    background-color: #eee;
+    border-radius: 4px;
+    margin: 0 1rem 1rem 0;
+    padding: 1rem;
+    flex: 1 0 10rem;
+    min-height: 8rem;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+
+.cardIcon,
+.cardIconLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.cardIcon > *:first-child,
+.cardIconLink > *:first-child {
+    margin-right: 0.5rem;
+}
+
+.cardLink,
+.cardIconLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card:hover,
+.cardIcon:hover,
+.cardLink:hover,
+.cardIconLink:hover {
+    /* box-shadow: 5px 5px #ccc; */
+    border: 1px solid #ccc;
+    /*box-shadow: 0 0 45px #999;
+    transform: translateY(-5px);*/
+}
+
+
+
+

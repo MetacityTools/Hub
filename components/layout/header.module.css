@@ -5,9 +5,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
     font-size: var(--xs);
-    color: #FFF;
     padding: 0 1rem;
 }
 
@@ -17,6 +15,5 @@
     height: 100%;
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
-    color: #FFF;
     cursor: pointer;
 }

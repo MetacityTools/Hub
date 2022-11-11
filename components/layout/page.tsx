@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
-import styles from "./dialog.module.css";
+import styles from "./page.module.css";
 import { Header } from "./header";
 
 
-export function DialogLayout(props: { email: string, children: ReactNode | ReactNode[] }) {
+export function PageLayout(props: { email: string, children: ReactNode | ReactNode[] }) {
     const { children, email } = props;
     return (
-        <div className={styles.dialog}>
+        <div className={styles.page}>
             <Header email={email}/>
             <div className={styles.content}>
                 {children}

@@ -35,7 +35,7 @@ export function FileView(props: { files: File[], onSubmit: (files: File[]) => vo
     return (
         <div className={style.view}>
             <div className={style.content}>
-                <h1>Let's upload your data <BiUpload className={style.icon}/></h1>
+                <h1>Let's upload your data</h1>
                 <p>You have selected {selected.length} file{selected.length > 1 ? 's' : ''} with a total size of {formatSize(selected.reduce((acc, file) => acc + file.size, 0))}.</p>
                 <div className={style.list}>
                     {condensed && selected.length > 3 ? (

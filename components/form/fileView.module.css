@@ -1,5 +1,4 @@
 .view {
-    background: #000;
     width: 100%;
     min-height: 100%;
 }
@@ -17,11 +16,9 @@
     flex-direction: column;
 }
 
-.file,
-.condensed {
+.file {
+    background: #EEE;
     padding: 1rem;
-    background: #222;
-    border: 1px solid #333;
     margin: 0.1rem;
     border-radius: 0.5rem;
     display: flex;
@@ -33,7 +30,6 @@
 }
 
 .file .name {
-    color: #FFF;
 }
 
 .file .size {
@@ -49,8 +45,7 @@
 }
 
 .file:hover {
-    background: #400;
-    border: 1px solid #800;
+    background: #FEE;
 }
 
 .file:hover .remove {
@@ -61,24 +56,24 @@
     padding: 1rem;
     cursor: pointer;
     border-radius: 0.5rem;
-    color: #DDD;
 }
 
 .upload:hover {
-    color: #FFF;
+
 }
 
 .condensed {
-    background: #111;
-    border: 1px solid #222;
+    margin: 1rem;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .condensed:hover {
-    background: #222;
+    color: #000;
 }
 
 .content h1 {
-    color: #444;
     display: flex;
     flex-direction: row;
     align-items: center;

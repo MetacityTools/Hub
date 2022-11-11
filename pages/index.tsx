@@ -1,15 +1,13 @@
 import { useSession, signIn } from "next-auth/react"
-import { Overview } from "../components/overview"
+import { Home } from "../components/pages/home"
+
 
 export default function Index() {
-	const { data: session } = useSession()
+	const { data: session } = useSession();
+
 	if (session && session.user && session.user.email) {
-		return <Overview email={session.user.email}/>
+		return (<Home email={session.user.email} />);
 	}
-	return (
-		<>
-			Not signed in <br />
-			<button onClick={() => signIn()}>Sign in</button>
-		</>
-	)
+
+	return (null);
 }
