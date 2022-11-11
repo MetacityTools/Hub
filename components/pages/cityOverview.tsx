@@ -1,14 +1,17 @@
 import { TopPanel } from "../layout/topPanel";
 import { Content } from "../layout/content";
 import { PageLayout } from "../layout/page";
-import { CardLink, CardIcon } from "../items/card";
+import { CardLink, CardIcon, CardIconLink } from "../items/card";
 import {IoIosAddCircleOutline} from 'react-icons/io';
 import { Breadcrumbs } from "../layout/breadcrumbs";
+import { Modal } from "../layout/modal";
+import React from "react";
 
 
 
-export function CityList(props: { email: string }) {
+export function CityOverview(props: { email: string }) {
     const { email } = props;
+    
     return (
         <PageLayout email={email}>
             <TopPanel>
@@ -17,9 +20,9 @@ export function CityList(props: { email: string }) {
             </TopPanel>
             <Breadcrumbs items={[{title: "Metacity", link: "/"}, {title: "Cities"}]}/>
             <Content>
-                <CardIcon title="Add City" icon={<IoIosAddCircleOutline/>} onClick={() => alert("hello")}/>
-                <CardLink title="Prague" link="/city/Prague" />
-                <CardLink title="Brno" link="/city/Prague"/>
+                <CardLink annotation="city" title="Prague" link="/city/Prague" />
+                <CardLink annotation="city" title="Brno" link="/city/Prague"/>
+                <CardIconLink title="Add City" icon={<IoIosAddCircleOutline/>} link="/add/city"/>
             </Content>
         </PageLayout>
     )

@@ -9,19 +9,25 @@ export function Card(props: { title: string }) {
     );
 }
 
-export function CardLink(props: { title: string, link: string }) {
+export function CardLink(props: { annotation?: string, title: string, link?: string }) {
     return (
-        <Link href={props.link} className={style.cardLink}>
-            {props.title}
-        </Link>
+        props.link ? (<Link href={props.link} className={style.cardLink}>
+            {props.annotation && <div className={style.annotation}>{props.annotation}</div>}
+            <div>{props.title}</div>
+        </Link>) : (
+            <div className={style.card}>
+                {props.annotation && <div className={style.annotation}>{props.annotation}</div>}
+                <div>{props.title}</div>
+            </div>
+        )
     );
 }
 
-export function CardIcon(props: { title: string, icon: React.ReactNode, onClick?: () => void }) {
+export function CardIcon(props: { title: string, icon: React.ReactNode, onClick: () => void }) {
     return (
         <div className={style.cardIcon} onClick={props.onClick}>
-            {props.icon}
-            {props.title}
+            <div className={style.icon}>{props.icon}</div>
+            <div>{props.title}</div>
         </div>
     );
 }
@@ -29,8 +35,8 @@ export function CardIcon(props: { title: string, icon: React.ReactNode, onClick?
 export function CardIconLink(props: { title: string, icon: React.ReactNode, link: string}) {
     return (
         <Link href={props.link} className={style.cardIconLink}>
-            {props.icon}
-            {props.title}
+            <div className={style.icon}>{props.icon}</div>
+            <div>{props.title}</div>
         </Link>
     );
 }

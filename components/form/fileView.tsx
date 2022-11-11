@@ -43,8 +43,8 @@ export function FileView(props: { files: File[], onSubmit: (files: File[]) => vo
                         {selected.map((file, index) => ( index < 3 &&
                             <div key={file.name} className={style.file} onClick={() => handleRemove(file)}>
                                 <div className={style.name}>{file.name}</div>
-                                <div className={style.remove}>remove</div>
                                 <div className={style.size}>{formatSize(file.size)}</div>
+                                <div className={style.remove}>remove</div>
                             </div> ))}
                             <div className={style.condensed}
                                 onClick={() => setCondensed(!condensed)}>Show remaining {selected.length - 3} files</div>
@@ -53,8 +53,8 @@ export function FileView(props: { files: File[], onSubmit: (files: File[]) => vo
                     : selected.map((file) => (
                             <div key={file.name} className={style.file} onClick={() => handleRemove(file)}>
                                 <div className={style.name}>{file.name}</div>
-                                <div className={style.remove}>remove</div>
                                 <div className={style.size}>{formatSize(file.size)}</div>
+                                <div className={style.remove}>remove</div>
                             </div>
                         ))}
                 </div>

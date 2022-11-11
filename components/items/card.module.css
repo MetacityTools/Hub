@@ -10,31 +10,36 @@
     min-height: 8rem;
     transition: all 0.2s ease-in-out;
     border: 1px solid #eee;
+}
+
+.cardLink,
+.cardIcon,
+.cardIconLink {
     cursor: pointer;
 }
 
 .cardIcon,
 .cardIconLink {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    color: #888;
 }
 
-.cardIcon > *:first-child,
-.cardIconLink > *:first-child {
-    margin-right: 0.5rem;
-}
-
-.cardLink,
-.cardIconLink {
+.cardLink {
     text-decoration: none;
     color: inherit;
 }
 
-.card:hover,
-.cardIcon:hover,
+.cardIconLink {
+    text-decoration: none;
+    color: #888;
+}
+
 .cardLink:hover,
+.cardIcon:hover,
 .cardIconLink:hover {
     /* box-shadow: 5px 5px #ccc; */
     border: 1px solid #ccc;
@@ -42,6 +47,16 @@
     transform: translateY(-5px);*/
 }
 
+.annotation {
+    margin-bottom: 0.5rem;
+    font-size: 0.7em;
+    color: #888;
+    text-transform: uppercase;
+}
 
 
 
+.icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}

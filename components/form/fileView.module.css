@@ -23,18 +23,21 @@
     border-radius: 0.5rem;
     display: flex;
     flex-direction: row;
+    align-items: baseline;
     justify-content: space-between;
-    align-items: center;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
 
 .file .name {
+    flex: 1;
 }
 
 .file .size {
     font-size: 0.8rem;
     color: #888;
+    margin-right: 0;
+    transition: all 0.2s ease-in-out;
 }
 
 .file .remove {
@@ -42,14 +45,20 @@
     color: #F00;
     opacity: 0;
     transition: all 0.2s ease-in-out;
+    font-size: 0;
 }
 
 .file:hover {
     background: #FEE;
 }
 
+.file:hover .size {
+    margin-right: 1rem;
+}
+
 .file:hover .remove {
     opacity: 1;
+    font-size: 100%;
 }
 
 .upload {

@@ -9,5 +9,10 @@ export default function Index() {
 		return (<Home email={session.user.email} />);
 	}
 
-	return (null);
+	return (
+		<>
+			Not signed in <br />
+			<button onClick={() => signIn()}>Sign in</button>
+		</>
+	);
 }
