@@ -1,0 +1,13 @@
+.error {
+    color: #F00;
+    margin: 1rem 0;
+    font-size: 0.8em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon {
+    margin-right: 0.25rem;
+    display: block;
+}

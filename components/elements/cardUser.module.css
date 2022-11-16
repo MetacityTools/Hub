@@ -1,0 +1,67 @@
+.card,
+.cardHeading {
+    flex: 1;
+    display: table-row;
+}
+.card {
+    background-color: #EEE;
+}
+
+
+.name {
+    font-size: 1rem;
+}
+
+.email {
+    color: #666;
+}
+
+.role {
+    color: #666;
+}
+
+.name,
+.role,
+.email,
+.actions {
+    display: table-cell;
+    padding: 0.5rem 1rem;
+    border: 1px solid #FFF;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+
+
+.card button {
+    border: none;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    color: #888;
+    background: none;
+
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.card button:hover {
+    color: #000;
+}
+
+.card button.delete {
+    color: #F46;
+}
+
+.card button.delete:hover {
+    color: #F00;
+}
+
+.actions {
+    text-align: right;
+}
+
+.actions .actionsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 100%;
+    position: relative;
+}
+
+
+.label {
+    display: block;
+    color: #888;
+    font-size: 1em;
+    position: absolute;
+    top: 1.25rem;
+    left: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.input {
+    border: 1px solid #EEE;
+    padding: 1.5rem 1rem 1rem;
+    outline: none;
+    border-radius: 4px;
+    font-size: 1em;
+    background: #EEE;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.input:active,
+.input:focus {
+    outline: none;
+    border: 1px solid #888;
+    background: #FFF;
+}
+
+.label.filled {
+    top: 0.5rem;
+    font-size: 0.5em;
+    color: #000;
+}

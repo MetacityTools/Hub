@@ -1,0 +1,36 @@
+.items {
+    width: 60rem;
+    margin: 1rem auto 2rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.page {
+    width: 60rem;
+    margin: 1rem auto 2rem;
+}
+
+.plain {
+    width: 60rem;
+    margin: 0 auto;
+}
+
+@media (max-width: 62rem) {
+    .items {
+        width: calc(100vw - 2rem);
+        margin: 1rem 1rem 2rem;
+    }
+
+    .page {
+        width: calc(100vw - 2rem);
+        margin: 1rem 1rem 2rem;
+    }
+
+    .plain {
+        width: calc(100vw - 2rem);
+        margin: 0 1rem;
+    }
+}

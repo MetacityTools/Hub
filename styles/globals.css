@@ -14,3 +14,14 @@ body, html {
     background: #FFF;
     color: #000;
 }
+
+p {
+    font-size: 1em;
+    line-height: 1.5em;
+    color: #222;
+}
+
+p.desc {
+    font-size: 0.8em;
+    color: #666;
+}

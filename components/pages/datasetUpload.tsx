@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { FileSelect } from "../form/fileSelect";
-import { FileView } from "../form/fileView";
+import { FileSelect } from "../forms/fileSelect";
+import { FileView } from "../forms/fileView";
 import { PageLayout } from "../layout/page";
 
 
