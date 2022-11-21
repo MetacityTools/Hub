@@ -1,8 +1,7 @@
 import React from 'react'
-import { ClientSafeProvider, getCsrfToken, getProviders, LiteralUnion, useSession } from "next-auth/react"
+import { getCsrfToken, getProviders, useSession } from "next-auth/react"
 import { useRouter } from "next/router";
-import { BuiltInProviderType } from 'next-auth/providers';
-import { AuthData, SignIn } from '../components/forms/signIn';
+import { Forms, AuthData } from '../components/components';
 
 
 async function getData() {
@@ -30,5 +29,5 @@ export default function SignInPage() {
         });
     }, []);
 
-    return (<SignIn authData={authData} />);
+    return (<Forms.SignIn authData={authData} />);
 }

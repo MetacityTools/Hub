@@ -1,11 +1,12 @@
 import { useSession, signIn } from "next-auth/react"
 import { useRouter } from "next/router";
-import { AddCity } from "../../../components/pages/addCity"
 import { checkRole } from "../../../lib/roles";
-
+import React from "react";
+import { Layout, Forms } from "../../../components/components";
 
 export default function Index() {
 	const { data: session, status } = useSession();
+	const email = session?.user?.email;
 	const router = useRouter();
 
 	if (!status || status === "unauthenticated" ||
@@ -13,7 +14,44 @@ export default function Index() {
 		router.push("/signin");
 	}
 
-	if (session && session.user && session.user.email) {
-		return <AddCity email={session.user.email}/>
-	}
+
+    const [error, setError] = React.useState<string>();
+
+    const handleSubmit = (city: string) => {
+        console.log(city);
+        if (city) {
+            fetch("/api/cities", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    city: city,
+                }),
+            }).then(async (res) => {
+                const body = await res.json();
+                if (res.ok) {
+                    router.replace("/cities");
+                } else {
+                    setError(body.error);
+                }
+            }).catch((err) => {
+                setError(err);
+            });
+        }
+    };
+
+    
+    return (
+        <Layout.PageLayout email={email}>
+            <Layout.Containers.PlainContainer>
+            <Layout.Breadcrumbs items={[{title: "Metacity", link: "/"}, {title: "Cities", link: "/cities"}, {title: "New City"}]}/>
+            </Layout.Containers.PlainContainer>
+            <Layout.Containers.PageContainer>
+                <p>Fill out the name of the city</p>
+                <p className="desc">The created city will be visible for anyone and all registred members will be allowed to upload new datasets to the created city.</p>
+                <Forms.CityAdd onSubmit={handleSubmit} error={error}/>
+            </Layout.Containers.PageContainer>
+        </Layout.PageLayout>
+    );
 }

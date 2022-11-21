@@ -9,6 +9,7 @@ interface InputPorps {
     type: string;
     className: string; 
     id: string;
+    inputRef: React.RefObject<HTMLInputElement>;
     onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
 }
 
@@ -27,7 +28,7 @@ export function Input(props: InputPorps) {
     return (
         <div className={(className ?? " ") + " " + style.container}>
             <label htmlFor={id} className={style.label + " " + ((inputValue !== "" || active) && style.filled)}>{label}</label>
-            <input id={id} type={type} value={value} className={style.input} onChange={handleChange} onFocus={() => setActive(true)} onBlur={() => setActive(false)} />
+            <input id={id} type={type} value={value} className={style.input} onChange={handleChange} onFocus={() => setActive(true)} onBlur={() => setActive(false)} ref={props.inputRef} />
         </div>
     );
 }

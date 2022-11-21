@@ -59,8 +59,7 @@ model VerificationToken {
 model City {
   id        Int      @id @default(autoincrement())
   name      String
-  country   String
-  dataDir   String
+  storage   String
   datasets  Dataset[]
 }
 

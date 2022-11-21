@@ -1,12 +1,15 @@
+import { User } from "@prisma/client";
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router";
+import React from "react";
 import { useEffect } from "react";
-import { Users } from "../components/pages/users"
+import { Layout, Elements } from "../components/components";
 import { checkRole } from "../lib/roles";
 
 
 export default function Index() {
     const { data: session, status } = useSession();
+    const email = session?.user?.email;
     const router = useRouter();
 
     useEffect(() => {
@@ -16,7 +19,31 @@ export default function Index() {
         }
     }, [session]);
 
-    if (session && session.user && session.user.email) {
-        return (<Users email={session.user.email} />);
-    }
+    const [users, setUsers] = React.useState<User[]>([]);
+    const [error, setError] = React.useState(null);
+
+    React.useEffect(() => {
+        fetch("/api/users")
+            .then((res) => res.json())
+            .then(
+                (result) => {
+                    setUsers(result.users);
+                },
+                (error) => {
+                    setError(error);
+                }
+            );
+    }, []);
+        
+
+    return (
+        <Layout.PageLayout email={email}>
+            <Layout.Containers.PlainContainer>
+                <Layout.Breadcrumbs items={[{title: "Metacity", link: "/"}, {title: "Users" }]}/>
+            </Layout.Containers.PlainContainer>
+            <Layout.Containers.ItemsContainer>
+                <Elements.UserTable users={users} />
+            </Layout.Containers.ItemsContainer>
+        </Layout.PageLayout>
+    );
 }

@@ -7,10 +7,12 @@ import style from "./cityAdd.module.css";
 
 
 export function CityAdd(props: { value?: string, onSubmit: (value: string) => void, error?: string }) {
-    const [city, setCity] = React.useState(props.value ?? "");
+    const ref = React.useRef<HTMLInputElement>(null);
 
     const handleSubmit = () => {
-        props.onSubmit(city);
+        if(ref.current) {
+            props.onSubmit(ref.current.value);
+        }
     };
 
     const formSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -22,9 +24,9 @@ export function CityAdd(props: { value?: string, onSubmit: (value: string) => vo
         <div>
             <div className={style.form}>
                 <form onSubmit={formSubmit}>
-                    <Input id="city" label="City" type="text" className={style.input} onChange={(e) => setCity(e.target.value)} />
+                    <Input id="city" label="City" type="text" className={style.input} inputRef={ref} />
                     {props.error ? <Error message={props.error} /> : null}
-                    <Submit value={"Add City"} onSubmit={handleSubmit}/>
+                    <Submit value={"Add City"}/>
                 </form>
             </div>
         </div>
