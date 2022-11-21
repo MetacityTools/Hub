@@ -26,8 +26,6 @@ export default function Index() {
 			</Layout.Containers.PlainContainer>
 			<Layout.Containers.ItemsContainer>
 				<Elements.Card.CardIconLink title="Add Dataset" icon={<IoIosAddCircleOutline />} link={"/actions/add/" + city + "/dataset"} />
-				<Elements.Card.CardLink title="test" annotation="dataset" link={"/" + city + "/dataset"} />
-				<Elements.Card.CardLink title="test" annotation="dataset" link={"/" + city + "/dataset"} />
 			</Layout.Containers.ItemsContainer>
 		</Layout.PageLayout>);
 }

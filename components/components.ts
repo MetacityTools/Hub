@@ -2,7 +2,7 @@ import { Button } from './elements/button';
 import * as Card from './elements/card';
 import { CardUser } from './elements/cardUser';
 import { Error } from './elements/error';
-import { Input } from './elements/input';
+import * as Input from './elements/input';
 import { Submit } from './elements/submit';
 import { UserTable } from './elements/userTable';
 
@@ -14,7 +14,6 @@ import { PageLayout } from './layout/page';
 
 import { CityAdd } from './forms/cityAdd';
 import { FileSelect } from './forms/fileSelect';
-import { FileView } from './forms/fileView';
 import { SignIn } from './forms/signIn';
 import type { AuthData } from './forms/signIn';
 
@@ -39,7 +38,6 @@ export const Layout = {
 export const Forms = {
     CityAdd,
     FileSelect,
-    FileView,
     SignIn,
 };
 

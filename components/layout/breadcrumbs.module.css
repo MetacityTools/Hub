@@ -4,7 +4,7 @@
     margin: 1rem auto 1rem;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
     list-style: none;
 }
 

@@ -8,38 +8,30 @@ export default function Index() {
 	const { data: session, status } = useSession();
 	const email = session?.user?.email;
 	const router = useRouter();
+    const { city } = router.query;
 
-	if (!status || status === "unauthenticated" ||
-		(status === "authenticated" && !checkRole(session, "admin"))) {
-		router.push("/signin");
-	}
+
+	//if (!status || status === "unauthenticated" ||
+	//	(status === "authenticated" && !checkRole(session, "admin"))) {
+	//	router.push("/signin");
+	//}
 	
-    const [files, setFiles] = React.useState<File[]>([]);
-    const [selected, setSelected] = React.useState<File[]>([]);
-    const [stage, setStage] = React.useState<number>(0);
+    const handleSubmit = (name: string, files: File[]) => {
+   
+    };
 
 
-    React.useEffect(() => {
-        if (files.length > 0) {
-            setStage(1);
-        }
-    }, [files]);
-
-    React.useEffect(() => {
-        if (selected.length > 0) {
-            setStage(2);
-        }
-    }, [selected]);
 
     return (
         <Layout.PageLayout email={email}>
-            { stage == 0 && <Forms.FileSelect onSelect={(files: File[]) => setFiles(files)}/>}
-            { stage == 1 && <Forms.FileView 
-                                files={files} 
-                                onSubmit={(files: File[]) => setSelected(files)}
-                                onAbort={() => setStage(0)}
-                            />}
-            { stage == 2 && <div>Upload</div>}
+            <Layout.Containers.PlainContainer>
+                <Layout.Breadcrumbs items={[{title: "Metacity", link: "/"}, {title: "Cities", link: "/cities"}, {title: city as string, link: "/" + city as string}, { title: "New Dataset"}]}/>
+                </Layout.Containers.PlainContainer>
+                <Layout.Containers.PageContainer>
+                    <p>Add your datasets</p>
+                    <p className="desc">The datasets will be uploaded and made available to all visitors.</p>
+                    <Forms.FileSelect onSubmit={handleSubmit} error="" />
+                </Layout.Containers.PageContainer>
         </Layout.PageLayout>
     );
 }

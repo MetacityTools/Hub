@@ -1,24 +1,36 @@
 import style from './fileSelect.module.css';
-import { BiUpload } from 'react-icons/bi';
+import { FileInput, TextInput } from '../elements/input';
+import { Error } from '../elements/error';
+import { Submit } from '../elements/submit';
+import React from 'react';
 
-export function FileSelect(props : { onSelect: (files: File[]) => void }) {
-    const { onSelect } = props;
+export function FileSelect(props : { onSubmit: (name: string, files: File[]) => void, error: string }) {
+    const { onSubmit } = props;
+    const [files, setFiles] = React.useState<File[]>([]);
+    const ref = React.useRef<HTMLInputElement>(null);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files) {
-            onSelect(Array.from(event.target.files));
+    React.useEffect(() => {
+        console.log(files);
+    }, [files]);
+
+    const handleSubmit = () => {
+        if (ref.current) {
+            const name = ref.current.value;
+            onSubmit(name, files);
         }
     };
 
     return (
-            <label htmlFor="file" className={style.upload}>
-                <div className={style.content}>
-                    <BiUpload className={style.icon}/>
-                    <h1>Let's upload your data</h1>
-                    <p>Click to upload SHP, OBJ, GeoJSON or ZIP.</p>
-                    <input type="file" id="file" name="file" multiple onChange={handleChange} />
-                </div>
-            </label>
+        <div>
+            <div className={style.form}>
+                <form onSubmit={handleSubmit}>
+                    <TextInput id="dataset" label="Dataset Name" className={style.input} inputRef={ref} />
+                    <FileInput id="files" label="Select OBJ, SHP or GeoJSON files" className={style.input} onSelect={setFiles} />
+                    {props.error ? <Error message={props.error} /> : null}
+                    <Submit value={"Add Dataset"}/>
+                </form>
+            </div>
+        </div> 
     );
 }
 
