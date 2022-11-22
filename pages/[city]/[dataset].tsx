@@ -1,7 +1,6 @@
 import { useSession, signIn } from "next-auth/react"
 import { useRouter } from 'next/router'
 import { useEffect } from "react";
-import { DatasetOverview } from "../../components/pages/datasetOverview";
 import { checkRole } from "../../lib/roles";
 
 
@@ -17,6 +16,7 @@ export default function Dataset() {
         }
 	}, [session]);
 
+	console.log(city, dataset);
 	if (session && session.user && session.user.email) {
 		return (dataset);
 	}

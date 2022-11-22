@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChangeEventHandler } from 'react';
-import { BsFilesAlt } from 'react-icons/bs';
+import { BsFilesAlt, BsFileArrowUp } from 'react-icons/bs';
 import style from './input.module.css';
 
 
@@ -76,8 +76,10 @@ export function FileInput(props: FileInputProps) {
 
     return (
         <>
-        <label htmlFor="file" className={style.files + " " + (files.length > 0 && style.buttonDim)}>
-            <div className={style.filesPrompt}><BsFilesAlt/> {files.length == 0 ? label : "Selected " + files.length + " files with size " + computeSize()}</div>
+        <label htmlFor="file" className={style.files + " " + (files.length > 0 && style.filesDim)}>
+            <div className={style.filesPrompt}>
+                {files.length == 0 ? <BsFilesAlt/> : <BsFileArrowUp/>}
+                {files.length == 0 ? label : "Selected " + files.length + " files with size " + computeSize()}</div>
             <input type="file" id="file" name="file" multiple onChange={handleChange}/>
         </label>
         <div className={style.fileList}>

@@ -15,11 +15,12 @@ export default function Index() {
 	}
 
 
-    const [error, setError] = React.useState<string>();
+    const [error, setError] = React.useState<string|undefined>();
 
     const handleSubmit = (city: string) => {
         console.log(city);
         if (city) {
+            setError(undefined);
             fetch("/api/cities", {
                 method: "POST",
                 headers: {

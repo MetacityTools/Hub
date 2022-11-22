@@ -9,15 +9,11 @@ import style from "./cityAdd.module.css";
 export function CityAdd(props: { value?: string, onSubmit: (value: string) => void, error?: string }) {
     const ref = React.useRef<HTMLInputElement>(null);
 
-    const handleSubmit = () => {
+    const formSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         if(ref.current) {
             props.onSubmit(ref.current.value);
         }
-    };
-
-    const formSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        handleSubmit();
     };
 
     return (

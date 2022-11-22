@@ -58,16 +58,16 @@ model VerificationToken {
 
 model City {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @unique
   storage   String
   datasets  Dataset[]
 }
 
 model Dataset {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @unique
   cityId    Int
   city      City     @relation(fields: [cityId], references: [id])
-  data      String
+  storage   String
 }
 
