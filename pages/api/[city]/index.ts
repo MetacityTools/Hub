@@ -41,7 +41,7 @@ async function createDataset(req: NextApiRequest, res: NextApiResponse<Response>
     //TODO get from URL
     const city = req.query.city as string;
     
-    const cityExists = await prisma.city.findFirst({
+    const cityExists = await prisma.city.findUnique({
         where: {
             name: city
         }
@@ -51,7 +51,7 @@ async function createDataset(req: NextApiRequest, res: NextApiResponse<Response>
         return res.status(400).json({ error: "City not found" });
 
     const dataset = fields.dataset;
-    const datasetExists = await prisma.dataset.findFirst({
+    const datasetExists = await prisma.dataset.findUnique({
         where: {
             name: dataset
         }

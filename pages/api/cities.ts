@@ -15,7 +15,7 @@ type Response = {
 
 async function createCity(req: NextApiRequest, res: NextApiResponse<Response>) {
 	const city = req.body.city;
-	const cityExists = await prisma.city.findFirst({
+	const cityExists = await prisma.city.findUnique({
 		where: {
 			name: city
 		}

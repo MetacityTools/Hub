@@ -1,13 +1,14 @@
-import { signOut, signIn } from "next-auth/react"
-import { PlainContainer } from "./container";
+import { signOut, signIn, useSession } from "next-auth/react"
 import style from "./header.module.css"
 
-export function Header(props: { email?: string | null }) {
-    const { email } = props;
+export function Header() {
+	const { data: session, status } = useSession();
+	const email = session?.user?.email;
+
     return (
         <header className={style.header}>
-                { props.email ? <div className={style.title}>Signed in as {email}</div> : <div className={style.title}>Metacity</div> }
-                { props.email ? <button onClick={() => signOut()}>Sign out</button> : <button onClick={() => signIn()}>Sign In</button> }
+                { email ? <div className={style.title}>Signed in as {email}</div> : <div className={style.title}>Metacity</div> }
+                { email ? <button onClick={() => signOut()}>Sign out</button> : <button onClick={() => signIn()}>Sign In</button> }
         </header>
     )
 }

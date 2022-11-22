@@ -1,24 +1,13 @@
-import { useSession, signIn } from "next-auth/react"
 import { useRouter } from "next/router";
-import { checkRole } from "../../../lib/roles";
 import React from "react";
 import { Layout, Forms } from "../../../components/components";
+import { Private } from "../../../components/private";
 
 export default function Index() {
-	const { data: session, status } = useSession();
-	const email = session?.user?.email;
 	const router = useRouter();
-
-	if (!status || status === "unauthenticated" ||
-		(status === "authenticated" && !checkRole(session, "admin"))) {
-		router.push("/signin");
-	}
-
-
     const [error, setError] = React.useState<string|undefined>();
 
     const handleSubmit = (city: string) => {
-        console.log(city);
         if (city) {
             setError(undefined);
             fetch("/api/cities", {
@@ -44,15 +33,17 @@ export default function Index() {
 
     
     return (
-        <Layout.PageLayout email={email}>
-            <Layout.Containers.PlainContainer>
-            <Layout.Breadcrumbs items={[{title: "Metacity", link: "/"}, {title: "Cities", link: "/cities"}, {title: "New City"}]}/>
-            </Layout.Containers.PlainContainer>
-            <Layout.Containers.PageContainer>
-                <p>Fill out the name of the city</p>
-                <p className="desc">The created city will be visible for anyone and all registred members will be allowed to upload new datasets to the created city.</p>
-                <Forms.CityAdd onSubmit={handleSubmit} error={error}/>
-            </Layout.Containers.PageContainer>
-        </Layout.PageLayout>
+        <Private role="admin">
+            <Layout.PageLayout>
+                <Layout.Containers.PlainContainer>
+                <Layout.Breadcrumbs items={[{title: "Metacity", link: "/"}, {title: "Cities", link: "/cities"}, {title: "New City"}]}/>
+                </Layout.Containers.PlainContainer>
+                <Layout.Containers.PageContainer>
+                    <p>Fill out the name of the city</p>
+                    <p className="desc">The created city will be visible for anyone and all registred members will be allowed to upload new datasets to the created city.</p>
+                    <Forms.CityAdd onSubmit={handleSubmit} error={error}/>
+                </Layout.Containers.PageContainer>
+            </Layout.PageLayout>
+        </Private>
     );
 }
