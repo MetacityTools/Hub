@@ -64,10 +64,23 @@ model City {
 }
 
 model Dataset {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  cityId    Int
-  city      City     @relation(fields: [cityId], references: [id])
-  storage   String
+  id            Int      @id @default(autoincrement())
+  name          String   @unique
+  cityId        Int
+  city          City     @relation(fields: [cityId], references: [id])
+  storageBase   String
+  storageSource String
+  processings   Processing[]
+}
+
+model Processing {
+  id            Int      @id @default(autoincrement())
+  datasetId     Int
+  dataset       Dataset  @relation(fields: [datasetId], references: [id])
+  status        String
+  progress      Int
+  message       String
+  startedAt     DateTime
+  finishedAt    DateTime?
 }
 

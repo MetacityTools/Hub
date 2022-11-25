@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { Layout, Forms } from "../../../components/components";
-import { Private } from "../../../components/private";
 
 export default function Index() {
 	const router = useRouter();
@@ -33,7 +32,7 @@ export default function Index() {
 
     
     return (
-        <Private role="admin">
+        <Layout.Private role="admin">
             <Layout.PageLayout>
                 <Layout.Containers.PlainContainer>
                 <Layout.Breadcrumbs items={[{title: "Metacity", link: "/"}, {title: "Cities", link: "/cities"}, {title: "New City"}]}/>
@@ -44,6 +43,6 @@ export default function Index() {
                     <Forms.CityAdd onSubmit={handleSubmit} error={error}/>
                 </Layout.Containers.PageContainer>
             </Layout.PageLayout>
-        </Private>
+        </Layout.Private>
     );
 }

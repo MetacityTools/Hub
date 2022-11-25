@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { checkRole } from "../lib/roles";
+import { checkRole } from "../../lib/roles";
 import React from "react";
 
 export function Private(props: { children: React.ReactNode, role: string }) {

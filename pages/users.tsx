@@ -1,7 +1,6 @@
 import { User } from "@prisma/client";
 import React from "react";
 import { Layout, Elements } from "../components/components";
-import { Private } from "../components/private";
 
 
 export default function Index() {
@@ -22,7 +21,7 @@ export default function Index() {
     }, []);
 
     return (
-        <Private role="admin">
+        <Layout.Private role="admin">
             <Layout.PageLayout>
                 <Layout.Containers.PlainContainer>
                     <Layout.Breadcrumbs items={[{ title: "Metacity", link: "/" }, { title: "Users" }]} />
@@ -31,6 +30,6 @@ export default function Index() {
                     <Elements.UserTable users={users} />
                 </Layout.Containers.ItemsContainer>
             </Layout.PageLayout>
-        </Private>
+        </Layout.Private>
     );
 }

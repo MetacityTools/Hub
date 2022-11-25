@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import React from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { Layout, Elements } from "../../components/components";
-import { Private } from "../../components/private";
 
 
 export default function Index() {
@@ -27,7 +26,7 @@ export default function Index() {
 	}, [city]);
 
 	return (
-		<Private role="admin">
+		<Layout.Private role="admin">
 			<Layout.PageLayout>
 				<Layout.Containers.PlainContainer>
 					<Layout.Breadcrumbs items={[{ title: "Metacity", link: "/" }, { title: "Cities", link: "/cities" }, { title: city as string }]} />
@@ -39,6 +38,6 @@ export default function Index() {
 					))}
 				</Layout.Containers.ItemsContainer>
 			</Layout.PageLayout>
-		</Private>
+		</Layout.Private>
 	);
 }

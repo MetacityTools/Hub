@@ -11,6 +11,7 @@ import { Breadcrumbs } from './layout/breadcrumbs';
 import * as Containers from './layout/container';
 import { Modal } from './layout/modal';
 import { PageLayout } from './layout/page';
+import { Private } from './layout/private';
 
 import { CityAdd } from './forms/cityAdd';
 import { FileSelect } from './forms/fileSelect';
@@ -32,7 +33,8 @@ export const Layout = {
     Breadcrumbs,
     Containers,
     Modal,
-    PageLayout
+    PageLayout,
+    Private
 };
 
 export const Forms = {

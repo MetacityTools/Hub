@@ -1,7 +1,6 @@
 import { Layout, Elements } from "../components/components";
 import { City } from "@prisma/client";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { Private } from "../components/private";
 import React from "react";
 
 export default function Index() {
@@ -20,7 +19,7 @@ export default function Index() {
     }, []);
 
     return (
-        <Private role="admin">
+        <Layout.Private role="admin">
             <Layout.PageLayout>
                 <Layout.Containers.PlainContainer>
                 <Layout.Breadcrumbs items={[{title: "Metacity", link: "/"}, {title: "Cities"}]}/>
@@ -32,6 +31,6 @@ export default function Index() {
                     ))}
                 </Layout.Containers.ItemsContainer>
             </Layout.PageLayout>
-        </Private>
+        </Layout.Private>
     )
 }

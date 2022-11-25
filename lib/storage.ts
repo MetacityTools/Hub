@@ -1,48 +1,135 @@
-import PersistentFile from 'formidable/PersistentFile';
 import fs from 'fs';
 import path from 'path';
+import prisma from './prismadb';
 
-
-export function initStorageCity(city: string): string | null {
-    if (!process.env.STORAGE_URL) {
-        throw new Error('STORAGE_URL is not defined');
-    }
-
-    const path_ext = path.join(process.env.STORAGE_URL, city);
-    if (!fs.existsSync(path_ext)) {
-        fs.mkdirSync(path_ext, { recursive: true });
-        return path_ext;
-    }
-
-    return null;
-}
-
-export function initStorageDataset(city: string, dataset: string): string | null {
-    if (!process.env.STORAGE_URL) {
-        throw new Error('STORAGE_URL is not defined');
-    }
-
-    const path_ext = path.join(process.env.STORAGE_URL, city, dataset, "source");
-    if (!fs.existsSync(path_ext)) {
-        fs.mkdirSync(path_ext, { recursive: true });
-        return path_ext;
-    }
-
-    return null;
+export interface PersistentFile {
+    filepath: string;
+    originalFilename: string;
 }
 
 
-export function storageDirExists(storage_path: string): boolean {
-    if (!process.env.STORAGE_URL) {
-        throw new Error('STORAGE_URL is not defined');
+export class Storage {
+    storageURL: string;
+
+    constructor() {
+        if (!process.env.STORAGE_URL)
+            throw new Error('STORAGE_URL environment variable is not set');
+        this.storageURL = process.env.STORAGE_URL;
     }
 
-    const path_ext = path.join(process.env.STORAGE_URL, storage_path);
-    return fs.existsSync(path_ext);
-} 
+    async addCity(city: string) {
+        const city_ = await this.getCity(city);
+        if (city_)
+            return null;
 
-export function filesToDirectory(files: File[], dir: string): void {
-    files.forEach(file => {
-        fs.renameSync((file as any).filepath, path.join(dir, (file as any).originalFilename));
-    });
+        const path_ = path.join(this.storageURL, city);
+        if (fs.existsSync(path_))
+            return null;
+
+        await prisma.city.create({
+            data: {
+                name: city,
+                storage: path_
+            }
+        });
+
+        fs.mkdirSync(path_, { recursive: true });
+        return path_;    
+    }
+
+    async addDataset(city: string, dataset: string, files: PersistentFile[]) {
+        const city_ = await this.getCity(city);
+        if (!city_)
+            return null;
+
+        const path_ = path.join(this.storageURL, city, dataset);
+        if (fs.existsSync(path_))
+            return null;
+
+        fs.mkdirSync(path_, { recursive: true });
+
+        const sourceDir = path.join(path_, 'source');
+        fs.mkdirSync(sourceDir, { recursive: true });
+        
+        files.forEach((file) => {
+            this.addFile(sourceDir, file);
+        });
+
+        const dataset_ = await prisma.dataset.create({
+            data: {
+                name: dataset,
+                storageBase: path_,
+                storageSource: sourceDir,
+                city: {
+                    connect: {
+                        id: city_.id
+                    }
+                }
+            }
+        });
+    
+        return dataset_;
+    }
+
+    storageItemExists(storagePath: string) {
+        const path_ = path.join(this.storageURL, storagePath);
+        return fs.existsSync(path_);
+    }
+
+    async getCity(city: string) {
+        const path_ = path.join(this.storageURL, city);
+        const city_ = await prisma.city.findUnique({
+            where: {
+                name: city
+            }
+        });
+
+        if (!city_)
+            return null;
+
+        if (!fs.existsSync(path_))
+            fs.mkdirSync(path_, { recursive: true });
+
+        return city_;
+    }
+
+    async getCities() {
+        return await prisma.city.findMany();
+    }
+
+    async getDatasets(city: string) {
+        const datasets = await prisma.dataset.findMany({
+            where: {
+                city: {
+                    name: city
+                }
+            }
+        });
+
+        return datasets;
+    }
+
+
+    async getDataset(city: string, dataset: string) {
+        const path_ = path.join(this.storageURL, city, dataset);
+        const dataset_ = await prisma.dataset.findUnique({
+            where: {
+                name: dataset
+            }
+        });
+
+        if (!dataset_)
+            return null;
+
+        if (!fs.existsSync(path_))
+            fs.mkdirSync(path_, { recursive: true });
+
+        return dataset_;
+    }
+
+    private addFile(dir: string, file: PersistentFile) {
+        const path_ = path.join(dir, file.originalFilename);
+        fs.renameSync(file.filepath, path_);
+        return file;
+    }
 }
